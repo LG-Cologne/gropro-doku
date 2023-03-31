@@ -2,11 +2,5 @@
 out
 *.iml
 target
-*.aux
-*.fls
-*.log
-*.out
-*.fdb_latexmk
-*.synctex.gz
-*.toc
+
 
