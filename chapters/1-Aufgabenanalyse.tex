@@ -1,25 +1,33 @@
 \chapter{Aufgabenanalyse}\label{ch:aufgabenanalyse}
-Der Sachverhalt der Aufgabenstellung handelt von einem Bahnnetz. Dieses beinhaltet mehere Bahnstationen die Teil einer oder meherer Zugverbindungen sein können. Der Sachverhalt setzt vorraus, dass Züge bei jeder Fahrt an Servicestationen versorgt werden müssen.
 \section{Interpretation der Aufgabe}\label{sec:interpretation-der-aufgabe}
+\subsection{Sachverhalt}\label{subsec:sachverhalt}
+Der Sachverhalt der Aufgabenstellung handelt von einem Bahnnetz. Dieses beinhaltet mehere Bahnstationen die Teil einer oder meherer Zugverbindungen sein können. Der Sachverhalt setzt vorraus, dass Züge bei jeder Fahrt an Servicestationen versorgt werden müssen.
+\subsection{Problemstellug}\label{subsec:aufgabenstellung}
 Gefordert ist ein Programm, welches die Positionen von Servicestationen ermittelt. Dafür muss gelten, dass jede Zugverbindung des angegebenen Bahnnetz mindestens eine Servicestation beinhaltet. In der Folge sollen Bahnstationen ermittelt werden die für das Bahnnetz als Servicestationen dienen können und somit alle Zugverbindungen des Bahnnetzes abdecken. Die Anzahl der Servicestationen soll dabei so gering wie möglich sein.
 \\
-Um die Speicherkapazitäten zu minimieren und die Programmlaufzeit zu optimieren werden zusätzliche Reduktionsverfahren auf die Zugverbindungen angewendet werden.\\ 
+Um die Speicherkapazitäten zu minimieren und die Programmlaufzeit zu optimieren werden zusätzliche Reduktionsverfahren auf die Zugverbindungensdaten angewendet werden.\\ 
 
+\section{Präzisierung der Teilaufgaben}\label{subsec:teilaufgaben}
+\subsection{Eingabe}\label{subsec:eingabe}
 Die Umsetzung erfolgt auf Basis eines Bahnnetzes, welches aus einer Datei eingelesen werden kann. Die Dateiendung ist dabei frei wählbar. Aus dieser Datei können die verschiedenen Zugverbindungen eingelesen werden. Diese bilden das Bahnnetz ab.\\
 Beginnt eine Zeile mit einem \enquote{\#} so wird diese als Kommentar interpretiert. Einzelne Zugverbindungen werden mit Zeilenumbrüchen getrennt. Die darin enthaltenden Bahnstationen sind durch Semikolons seperierbar.\\
 
+\subsection{Datenreduktion}\label{subsubsec:datenreduktion}
 Auf diese Bahnstationen werden nun drei verschiedene Reduktionsverfahren angewendet. Diese sollen die Anzahl der Bahnstationen und Bahnverbindungen reduzieren, ohne dabei einen Informationsverlust zu riskieren.\\ 
 
+\subsubsection{Doppelstationen}\label{subsubsec:doppelstationen}
 Dafür werden zunächst alle Zugverbindungen nach Mehrfachvorkommen von Stationen geprüft. Sollte eine Station mehrfach in einer Verbindung angefahren werden, braucht diese nur einmal in der Zugverbindung gespeichert werden.
 
+\subsubsection{Stationsabhängigkeiten}\label{subsubsec:stationsabhaengigkeiten}
 Als nächstes werden Stationsabhängigkeiten geprüft. Sollte in allen Zugverbindung die eine beliebige Station A beinhaltet, auch eine andere Station B auftauchen kann die betrachtete Station A entfernt werden. Es ist davon auszugehen, dass dabei keine Informationsverlust riskiert wird, da jede Zugverbindung der betrachteten Station A auch die gefundene Station B passiert. Ob die Stationen in jeder Verbindung gleich angefahren werden, spielt dafür keine Rolle.
 
+\subsubsection{Implizite Zugverbindungen}\label{subsubsec:implizite-zugverbindungen}
 Die letzte Reduktionstechnik überprüft ob eine Zugverbindung implizit in einer anderen Zugverbindung enthalten ist. Sollte dies der Fall sein, darf die größere Zugverbindung entfernt werden. Dies ist erlaubt, da alle Stationen der kleineren Verbindung auch in der größeren Verbindung angefahren werden. Die größere Verbindung ist somit redundant.\\
 \\
-
+\subsection{Algorithmus}\label{subsec:algorithmus}
 Zur Berechnung des Algorithmuses werden die übergebliebenen Bahnstationen gesammelt. Anhand derer wird nun die minimale Anzahl an Servicestationen ermittelt. Der dafür zuständige Algorithmus ist ein iteratives Vorgehen, welches nach Greedy-Prinzipien arbeitet.\\
 \\
-
+\subsection{Ausgabe}\label{subsec:ausgabe}
 Im Anschluss an die Berechnung wird die Ausgabe erzeugt. Diese besteht aus einer einzeiligen .txt Datei. In dieser werden, identisch zur Eingabedatei, die ermittelten Bahnstationen semikolongetrennt aufgelistet.\\
 
 \begin{figure}[h]
