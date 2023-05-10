@@ -2,9 +2,25 @@
 
 
 \section{Gesamtsystem}\label{sec:gesamtsystem}
-Es wurde eine Mischung aus EVA und MVC genutzt. %TODO
+Das System arbeitet nach dem EVA-Prinzpip. Die EVA-Segmente werden von einem Controller erweitert, welcher das Programm koordiniert und den Einstiegspunkt des Programms darstellt.
 
 \subsection{Eingabe}\label{subsec:eingabe}
 \subsection{Verarbeitung}\label{subsec:verarbeitung}
 \subsection{Ausgabe}\label{subsec:ausgabe}
+
+\section{Strukturen}\label{sec:strukturen}
 \subsection{Datenstrukturen}\label{subsec:datenstrukt}
+\subsubsection{TrainConnection}\label{subsubsec:trainconnection}
+\subsubsection{Stations}\label{subsubsec:stations}
+\subsubsection{TrainWeb}\label{subsubsec:trainweb}
+
+\subsection{Beschreibung der drei Reduktionsverfahren}
+\subsubsection{Doppelstationen}\label{subsubsec:doppelstationen}
+Um Speicherkapazitäten zu sparen werden zunächst alle Zugverbindungen nach Mehrfachvorkommen von Stationen geprüft. Sollte eine Station mehrfach in einer Verbindung angefahren werden, braucht diese nur einmal in der Zugverbindung gespeichert werden. Für die spätere Berechnung ist nur relevant welche Stationen in einer Zugverbindung angefahren werden. Die Reihenfolge der Stationen spielt keine Rolle. Somit gehen durch die einfache Speicherung von Stationen keine Inforamtionen verloren.\\
+
+\subsubsection{Stationsabhängigkeiten}
+Als nächstes werden Stationsabhängigkeiten geprüft. Sollte in allen Zugverbindung die eine beliebige Station A beinhaltet, auch eine andere Station B auftauchen kann die betrachtete Station A entfernt werden. Es ist davon auszugehen, dass dabei keine Informationsverlust riskiert wird, da jede Zugverbindung der betrachteten Station A auch die gefundene Station B passiert. Ob die Stationen in jeder Verbindung gleich angefahren werden, spielt dafür keine Rolle.
+
+\subsubsection{Implizite Zugverbindungen}
+Die letzte Reduktionstechnik überprüft ob eine Zugverbindung implizit in einer anderen Zugverbindung enthalten ist. Sollte dies der Fall sein, darf die größere Zugverbindung entfernt werden. Dies ist erlaubt, da alle Stationen der kleineren Verbindung auch in der größeren Verbindung angefahren werden. Die größere Verbindung ist somit redundant.\\
+

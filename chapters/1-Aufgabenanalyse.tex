@@ -16,16 +16,16 @@ Beginnt eine Zeile mit einem \enquote{\#} so wird diese als Kommentar interpreti
 Auf diese Bahnstationen werden nun drei verschiedene Reduktionsverfahren angewendet. Diese sollen die Anzahl der Bahnstationen und Bahnverbindungen reduzieren, ohne dabei einen Informationsverlust zu riskieren.\\ 
 
 \subsubsection{Doppelstationen}\label{subsubsec:doppelstationen}
-Dafür werden zunächst alle Zugverbindungen nach Mehrfachvorkommen von Stationen geprüft. Sollte eine Station mehrfach in einer Verbindung angefahren werden, braucht diese nur einmal in der Zugverbindung gespeichert werden.
+Doppelte Stationen innerhalb einer Zugverbindung werden entfernt.
 
 \subsubsection{Stationsabhängigkeiten}\label{subsubsec:stationsabhaengigkeiten}
-Als nächstes werden Stationsabhängigkeiten geprüft. Sollte in allen Zugverbindung die eine beliebige Station A beinhaltet, auch eine andere Station B auftauchen kann die betrachtete Station A entfernt werden. Es ist davon auszugehen, dass dabei keine Informationsverlust riskiert wird, da jede Zugverbindung der betrachteten Station A auch die gefundene Station B passiert. Ob die Stationen in jeder Verbindung gleich angefahren werden, spielt dafür keine Rolle.
+Voneinander abhängige Stationen werden zusammengefasst.
 
 \subsubsection{Implizite Zugverbindungen}\label{subsubsec:implizite-zugverbindungen}
-Die letzte Reduktionstechnik überprüft ob eine Zugverbindung implizit in einer anderen Zugverbindung enthalten ist. Sollte dies der Fall sein, darf die größere Zugverbindung entfernt werden. Dies ist erlaubt, da alle Stationen der kleineren Verbindung auch in der größeren Verbindung angefahren werden. Die größere Verbindung ist somit redundant.\\
+Zugverbindungen die andere Zugverbindungen beinhalten, werden entfernt.
 \\
 \subsection{Algorithmus}\label{subsec:algorithmus}
-Zur Berechnung des Algorithmuses werden die übergebliebenen Bahnstationen gesammelt. Anhand derer wird nun die minimale Anzahl an Servicestationen ermittelt. Der dafür zuständige Algorithmus ist ein iteratives Vorgehen, welches nach Greedy-Prinzipien arbeitet.\\
+Zur Berechnung des Algorithmus werden die übergebliebenen Bahnstationen gesammelt. Anhand derer wird nun die minimale Anzahl an Servicestationen ermittelt. Der dafür zuständige Algorithmus ist ein iteratives Vorgehen, welches nach Greedy-Prinzipien arbeitet.\\
 \\
 \subsection{Ausgabe}\label{subsec:ausgabe}
 Im Anschluss an die Berechnung wird die Ausgabe erzeugt. Diese besteht aus einer einzeiligen .txt Datei. In dieser werden, identisch zur Eingabedatei, die ermittelten Bahnstationen semikolongetrennt aufgelistet.\\
