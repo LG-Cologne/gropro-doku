@@ -1,26 +1,51 @@
 \chapter{Aufgabenanalyse}\label{ch:aufgabenanalyse}
-
-
+Der Sachverhalt der Aufgabenstellung handelt von einem Bahnnetz. Dieses beinhaltet mehere Bahnstationen die Teil einer oder meherer Zugverbindungen sein können. Der Sachverhalt setzt vorraus, dass Züge bei jeder Fahrt an Servicestationen versorgt werden müssen.
 \section{Interpretation der Aufgabe}\label{sec:interpretation-der-aufgabe}
-Gefordert ist ein Programm, welches TODO\\ %TODO
+Gefordert ist ein Programm, welches die Positionen von Servicestationen ermittelt. Dafür muss gelten, dass jede Zugverbindung des angegebenen Bahnnetz mindestens eine Servicestation beinhaltet. In der Folge sollen Bahnstationen ermittelt werden die für das Bahnnetz als Servicestationen dienen können und somit alle Zugverbindungen des Bahnnetzes abdecken. Die Anzahl der Servicestationen soll dabei so gering wie möglich sein.
+\\
+Um die Speicherkapazitäten zu minimieren und die Programmlaufzeit zu optimieren werden zusätzliche Reduktionsverfahren auf die Zugverbindungen angewendet werden.\\ 
 
-Als Datenstruktur wird .\\%%TODO
-Bevorzugt wird float, da 32-Bit mehr als ausreichend für Rechenoperationen mit Zahlen von bis zu 6.1.
-Zudem kann durch Hardwarebeschleunigung, oder auch ohne, eine kürzere Laufzeit erreicht werden, im Gegensatz zu Double-Operationen.\\ %TODO
+Die Umsetzung erfolgt auf Basis eines Bahnnetzes, welches aus einer Datei eingelesen werden kann. Die Dateiendung ist dabei frei wählbar. Aus dieser Datei können die verschiedenen Zugverbindungen eingelesen werden. Diese bilden das Bahnnetz ab.\\
+Beginnt eine Zeile mit einem \enquote{\#} so wird diese als Kommentar interpretiert. Einzelne Zugverbindungen werden mit Zeilenumbrüchen getrennt. Die darin enthaltenden Bahnstationen sind durch Semikolons seperierbar.\\
 
-Die Eingabedatei wird zeilenweise eingelesen.
-Beginnt eine Zeile mit einem Semicolon, wird diese als Kommentar beziehungsweise als Beschreibung interpretiert.
+Auf diese Bahnstationen werden nun drei verschiedene Reduktionsverfahren angewendet. Diese sollen die Anzahl der Bahnstationen und Bahnverbindungen reduzieren, ohne dabei einen Informationsverlust zu riskieren.\\ 
+
+Dafür werden zunächst alle Zugverbindungen nach Mehrfachvorkommen von Stationen geprüft. Sollte eine Station mehrfach in einer Verbindung angefahren werden, braucht diese nur einmal in der Zugverbindung gespeichert werden.
+
+Als nächstes werden Stationsabhängigkeiten geprüft. Sollte in allen Zugverbindung die eine beliebige Station A beinhaltet, auch eine andere Station B auftauchen kann die betrachtete Station A entfernt werden. Es ist davon auszugehen, dass dabei keine Informationsverlust riskiert wird, da jede Zugverbindung der betrachteten Station A auch die gefundene Station B passiert. Ob die Stationen in jeder Verbindung gleich angefahren werden, spielt dafür keine Rolle.
+
+Die letzte Reduktionstechnik überprüft ob eine Zugverbindung implizit in einer anderen Zugverbindung enthalten ist. Sollte dies der Fall sein, darf die größere Zugverbindung entfernt werden. Dies ist erlaubt, da alle Stationen der kleineren Verbindung auch in der größeren Verbindung angefahren werden. Die größere Verbindung ist somit redundant.\\
+\\
+
+Zur Berechnung des Algorithmuses werden die übergebliebenen Bahnstationen gesammelt. Anhand derer wird nun die minimale Anzahl an Servicestationen ermittelt. Der dafür zuständige Algorithmus ist ein iteratives Vorgehen, welches nach Greedy-Prinzipien arbeitet.\\
+\\
+
+Im Anschluss an die Berechnung wird die Ausgabe erzeugt. Diese besteht aus einer einzeiligen .txt Datei. In dieser werden, identisch zur Eingabedatei, die ermittelten Bahnstationen semikolongetrennt aufgelistet.\\
+
 \begin{figure}[h]
     \centering
     \caption{Input-Restriktionen}
     \begin{itemize}[noitemsep]
-        \item Restriktion 1.
+        \item Es muss mindestens eine (nicht Kommentar-) Zeile vorhanden sein
+        \item Jede Zeile muss mindestens 2 Stationen enthalten
+        \item Jede Zeile darf beliebig viele Stationen enthalten
+        \item Es dürfen beliebig viele Zeilen vorhanden sein
+        \item Es dürfen beliebig viele Kommentar-Zeilen vorhanden sein
+        \item Semikolons dürfen nicht am Anfang oder Ende einer Zeile stehen
+        \item Semikolons dürfen nicht hintereinander stehen
     \end{itemize}
     \label{fig:input-restrictions}
 \end{figure}
 
-Die Lösung des Problems wird mittels TODO realisiert. %TODO
-TODO Beschreibe Algorithmus %TODO
+\begin{figure}[h]
+    \centering
+    \caption{Stationnamen-Restriktionen}
+    \begin{itemize}[noitemsep]
+        \item Ein Name darf nur aus Buchstaben von A bis Z bestehen
+        \item Ein Name darf aus maximal 3 Buchstaben bestehen
+    \end{itemize}
+    \label{fig:stationname-restrictions}
+\end{figure}
 
 
 \section{Fehlerarten}\label{sec:fehlerarten}
@@ -28,20 +53,28 @@ Die Eingabedatei kann verschiedene Integritätsbedingungen verletzen.
 Das Programm muss diese Fehlerarten identifizieren und den Nutzer darüber informieren.
 
 \subsection{Technische Fehler}\label{subsec:technische-fehler}
-%TODO
+Technische Fehler entstehen, wenn dem Programm ein nicht existierender Dateiname übergeben wird.
 
 \subsection{Syntaktische Fehler}\label{subsec:syntaktische-fehler}
 Die Eingabedatei muss der Struktur aus~\nameref{fig:input-restrictions} entsprechen.
-So kann zum Beispiel ein syntaktischer Fehler provoziert werden, indem TODO%TODO
+So kann zum Beispiel ein syntaktischer Fehler provoziert werden, indem Stationnamen nicht semikolongetrennt sind.
 
 \subsection{Semantische Fehler}\label{subsec:semantische-fehler}
-
+Die eingelesenen Stationnamen müssen der Struktur aus~\nameref{fig:stationname-restrictions} entsprechen.
+So kann zum Beispiel ein syntaktischer Fehler provoziert werden, indem Stationnamen Zahlen beinhalten.
 
 \section{Fehlerbehandlung}\label{sec:fehlerbehandlung}
 
 \subsection{Technische Fehler}\label{subsec:technische-fehler-behandlung}
+Ist ein technischer Fehler vorhanden, wird eine Ausnahme geworfen und das Programm beendet.
+
 
 \subsection{Syntaktische Fehler}\label{subsec:syntaktische-fehler-behandlung}
+Wird ein syntaktischer Fehler identifiziert, wird eine Ausnahme geworfen und das Programm beendet. Außerdem wird eine Erklärung für die korrekte Syntax der Eingabedatei ausgegeben.
 
 \subsection{Semantische Fehler}\label{subsec:semantische-fehler-behandlung}
+Wird ein syntaktischer Fehler identifiziert, wird eine Ausnahme geworfen und das Programm beendet. Außerdem wird eine Erklärung für gültige Stationnamen ausgegeben.
+
+
 \subsection{Sonderfälle}\label{subsec:sonderfaelle}
+Nach der Datenreduktion kann es sein, dass eine Zugverbindung nurnoch aus einer Station besteht. Beim einlesen von Zugverbindungen ist dies ungültig und wirft eine Ausnahme. Nach dem Einlesen und somit auch nach der Datenreduktion ist dies jedoch wieder erlaubt und ist eine gültige Zugverbindung.\\
