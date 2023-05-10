@@ -1,33 +1,33 @@
 \chapter{Aufgabenanalyse}\label{ch:aufgabenanalyse}
-\section{Interpretation der Aufgabe}\label{sec:interpretation-der-aufgabe}
-\subsection{Sachverhalt}\label{subsec:sachverhalt}
+\section{Interpretation der Aufgabe}\label{auf:sec:interpretation-der-aufgabe}
+\subsection{Sachverhalt}\label{auf:subsec:sachverhalt}
 Der Sachverhalt der Aufgabenstellung handelt von einem Bahnnetz. Dieses beinhaltet mehere Bahnstationen die Teil einer oder meherer Zugverbindungen sein können. Der Sachverhalt setzt vorraus, dass Züge bei jeder Fahrt an Servicestationen versorgt werden müssen.
-\subsection{Problemstellug}\label{subsec:aufgabenstellung}
+\subsection{Problemstellug}\label{auf:subsec:aufgabenstellung}
 Gefordert ist ein Programm, welches die Positionen von Servicestationen ermittelt. Dafür muss gelten, dass jede Zugverbindung des angegebenen Bahnnetz mindestens eine Servicestation beinhaltet. In der Folge sollen Bahnstationen ermittelt werden die für das Bahnnetz als Servicestationen dienen können und somit alle Zugverbindungen des Bahnnetzes abdecken. Die Anzahl der Servicestationen soll dabei so gering wie möglich sein.
 \\
 Um die Speicherkapazitäten zu minimieren und die Programmlaufzeit zu optimieren werden zusätzliche Reduktionsverfahren auf die Zugverbindungensdaten angewendet werden.\\ 
 
-\section{Präzisierung der Teilaufgaben}\label{subsec:teilaufgaben}
-\subsection{Eingabe}\label{subsec:eingabe}
-Die Umsetzung erfolgt auf Basis eines Bahnnetzes, welches aus einer Datei eingelesen werden kann. Die Dateiendung ist dabei frei wählbar. Aus dieser Datei können die verschiedenen Zugverbindungen eingelesen werden. Diese bilden das Bahnnetz ab.\\
+\section{Präzisierung der Teilaufgaben}\label{auf:subsec:teilaufgaben}
+\subsection{Eingabe}\label{auf:subsec:eingabe}
+Die Umsetzung erfolgt auf Basis eines Bahnnetzes, welches aus einer Datei eingelesen werden kann. Die Dateiendung ist dabei frei wählbar. Aus dieser Datei werden die verschiedenen Zugverbindungen eingelesen. Diese bilden das Bahnnetz ab.\\
 Beginnt eine Zeile mit einem \enquote{\#} so wird diese als Kommentar interpretiert. Einzelne Zugverbindungen werden mit Zeilenumbrüchen getrennt. Die darin enthaltenden Bahnstationen sind durch Semikolons seperierbar.\\
 
-\subsection{Datenreduktion}\label{subsubsec:datenreduktion}
+\subsection{Datenreduktion}\label{auf:subsubsec:datenreduktion}
 Auf diese Bahnstationen werden nun drei verschiedene Reduktionsverfahren angewendet. Diese sollen die Anzahl der Bahnstationen und Bahnverbindungen reduzieren, ohne dabei einen Informationsverlust zu riskieren.\\ 
 
-\subsubsection{Doppelstationen}\label{subsubsec:doppelstationen}
+\subsubsection{Doppelstationen}\label{auf:subsubsec:doppelstationen}
 Doppelte Stationen innerhalb einer Zugverbindung werden entfernt.
 
-\subsubsection{Stationsabhängigkeiten}\label{subsubsec:stationsabhaengigkeiten}
+\subsubsection{Stationsabhängigkeiten}\label{auf:subsubsec:stationsabhaengigkeiten}
 Voneinander abhängige Stationen werden zusammengefasst.
 
-\subsubsection{Implizite Zugverbindungen}\label{subsubsec:implizite-zugverbindungen}
+\subsubsection{Implizite Zugverbindungen}\label{auf:subsubsec:implizite-zugverbindungen}
 Zugverbindungen die andere Zugverbindungen beinhalten, werden entfernt.
 \\
-\subsection{Algorithmus}\label{subsec:algorithmus}
+\subsection{Algorithmus}\label{auf:subsec:algorithmus}
 Zur Berechnung des Algorithmus werden die übergebliebenen Bahnstationen gesammelt. Anhand derer wird nun die minimale Anzahl an Servicestationen ermittelt. Der dafür zuständige Algorithmus ist ein iteratives Vorgehen, welches nach Greedy-Prinzipien arbeitet.\\
 \\
-\subsection{Ausgabe}\label{subsec:ausgabe}
+\subsection{Ausgabe}\label{auf:subsec:ausgabe}
 Im Anschluss an die Berechnung wird die Ausgabe erzeugt. Diese besteht aus einer einzeiligen .txt Datei. In dieser werden, identisch zur Eingabedatei, die ermittelten Bahnstationen semikolongetrennt aufgelistet.\\
 
 \begin{figure}[h]
@@ -42,7 +42,7 @@ Im Anschluss an die Berechnung wird die Ausgabe erzeugt. Diese besteht aus einer
         \item Semikolons dürfen nicht am Anfang oder Ende einer Zeile stehen
         \item Semikolons dürfen nicht hintereinander stehen
     \end{itemize}
-    \label{fig:input-restrictions}
+    \label{auf:fig:input-restrictions}
 \end{figure}
 
 \begin{figure}[h]
@@ -52,37 +52,37 @@ Im Anschluss an die Berechnung wird die Ausgabe erzeugt. Diese besteht aus einer
         \item Ein Name darf nur aus Buchstaben von A bis Z bestehen
         \item Ein Name darf aus maximal 3 Buchstaben bestehen
     \end{itemize}
-    \label{fig:stationname-restrictions}
+    \label{auf:fig:stationname-restrictions}
 \end{figure}
 
 
-\section{Fehlerarten}\label{sec:fehlerarten}
+\section{Fehlerarten}\label{auf:sec:fehlerarten}
 Die Eingabedatei kann verschiedene Integritätsbedingungen verletzen.
 Das Programm muss diese Fehlerarten identifizieren und den Nutzer darüber informieren.
 
-\subsection{Technische Fehler}\label{subsec:technische-fehler}
+\subsection{Technische Fehler}\label{auf:subsec:technische-fehler}
 Technische Fehler entstehen, wenn dem Programm ein nicht existierender Dateiname übergeben wird.
 
-\subsection{Syntaktische Fehler}\label{subsec:syntaktische-fehler}
+\subsection{Syntaktische Fehler}\label{auf:subsec:syntaktische-fehler}
 Die Eingabedatei muss der Struktur aus~\nameref{fig:input-restrictions} entsprechen.
 So kann zum Beispiel ein syntaktischer Fehler provoziert werden, indem Stationnamen nicht semikolongetrennt sind.
 
-\subsection{Semantische Fehler}\label{subsec:semantische-fehler}
+\subsection{Semantische Fehler}\label{auf:subsec:semantische-fehler}
 Die eingelesenen Stationnamen müssen der Struktur aus~\nameref{fig:stationname-restrictions} entsprechen.
 So kann zum Beispiel ein syntaktischer Fehler provoziert werden, indem Stationnamen Zahlen beinhalten.
 
-\section{Fehlerbehandlung}\label{sec:fehlerbehandlung}
+\section{Fehlerbehandlung}\label{auf:sec:fehlerbehandlung}
 
-\subsection{Technische Fehler}\label{subsec:technische-fehler-behandlung}
+\subsection{Technische Fehler}\label{auf:subsec:technische-fehler-behandlung}
 Ist ein technischer Fehler vorhanden, wird eine Ausnahme geworfen und das Programm beendet.
 
 
-\subsection{Syntaktische Fehler}\label{subsec:syntaktische-fehler-behandlung}
+\subsection{Syntaktische Fehler}\label{auf:subsec:syntaktische-fehler-behandlung}
 Wird ein syntaktischer Fehler identifiziert, wird eine Ausnahme geworfen und das Programm beendet. Außerdem wird eine Erklärung für die korrekte Syntax der Eingabedatei ausgegeben.
 
-\subsection{Semantische Fehler}\label{subsec:semantische-fehler-behandlung}
+\subsection{Semantische Fehler}\label{auf:subsec:semantische-fehler-behandlung}
 Wird ein syntaktischer Fehler identifiziert, wird eine Ausnahme geworfen und das Programm beendet. Außerdem wird eine Erklärung für gültige Stationnamen ausgegeben.
 
 
-\subsection{Sonderfälle}\label{subsec:sonderfaelle}
+\subsection{Sonderfälle}\label{auf:subsec:sonderfaelle}
 Nach der Datenreduktion kann es sein, dass eine Zugverbindung nurnoch aus einer Station besteht. Beim einlesen von Zugverbindungen ist dies ungültig und wirft eine Ausnahme. Nach dem Einlesen und somit auch nach der Datenreduktion ist dies jedoch wieder erlaubt und ist eine gültige Zugverbindung.\\

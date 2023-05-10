@@ -1,22 +1,24 @@
 \chapter{Verfahrensbeschreibung}\label{ch:verfahrensbeschreibung}
 
 
-\section{Gesamtsystem}\label{sec:gesamtsystem}
+\section{Gesamtsystem}\label{ver:sec:gesamtsystem}
 Das System arbeitet nach dem EVA-Prinzpip. Die EVA-Segmente werden von einem Controller erweitert, welcher das Programm koordiniert und den Einstiegspunkt des Programms darstellt.
 
-\subsection{Eingabe}\label{subsec:eingabe}
+\subsection{Eingabe}\label{ver:subsec:eingabe}
+Um ein vollständiges Bahnnetz abbilden zu können werden alle Bahnverbindungen aus der Eingabedatei eingelesen. Aus diesen Verbindungen können dann später die gewünschten Bahnstationen ermittelt werden. Um das Netz möglichst übersichtlich abzuspeichern werden Instanzen des Objekt \ref{}\\
+
 
 \subsection{Verarbeitung}\label{subsec:verarbeitung}
-\subsection{Ausgabe}\label{subsec:ausgabe}
+\subsection{Ausgabe}\label{ver:subsec:ausgabe}
 
-\section{Strukturen}\label{sec:strukturen}
-\subsection{Datenstrukturen}\label{subsec:datenstrukt}
-\subsubsection{TrainConnection}\label{subsubsec:trainconnection}
-\subsubsection{Stations}\label{subsubsec:stations}
-\subsubsection{TrainWeb}\label{subsubsec:trainweb}
+\section{Strukturen}\label{ver:sec:strukturen}
+\subsection{Datenstrukturen}\label{ver:subsec:datenstrukt}
+\subsubsection{TrainConnection}\label{ver:subsubsec:trainconnection}
+\subsubsection{Stations}\label{ver:subsubsec:stations}
+\subsubsection{TrainWeb}\label{ver:subsubsec:trainweb}
 
 \subsection{Beschreibung der drei Reduktionsverfahren}
-\subsubsection{Doppelstationen}\label{subsubsec:doppelstationen}
+\subsubsection{Doppelstationen}\label{ver:subsubsec:doppelstationen}
 In diesem Verfahren werden alle Zugverbindungen nach Mehrfachvorkommen von Stationen geprüft. Sollte eine Station mehrfach in einer Verbindung angefahren werden, braucht diese nur einmal in der Zugverbindung gespeichert werden. Für die spätere Berechnung ist nur relevant welche Stationen in einer Zugverbindung angefahren werden. Die Reihenfolge der Stationen spielt somit keine Rolle. Somit gehen durch die einfache Speicherung von Stationen keine Inforamtionen verloren.\\
 
 \subsubsection{Stationsabhängigkeiten}
