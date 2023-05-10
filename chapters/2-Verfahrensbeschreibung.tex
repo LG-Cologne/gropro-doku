@@ -5,6 +5,7 @@
 Das System arbeitet nach dem EVA-Prinzpip. Die EVA-Segmente werden von einem Controller erweitert, welcher das Programm koordiniert und den Einstiegspunkt des Programms darstellt.
 
 \subsection{Eingabe}\label{subsec:eingabe}
+
 \subsection{Verarbeitung}\label{subsec:verarbeitung}
 \subsection{Ausgabe}\label{subsec:ausgabe}
 
@@ -16,11 +17,11 @@ Das System arbeitet nach dem EVA-Prinzpip. Die EVA-Segmente werden von einem Con
 
 \subsection{Beschreibung der drei Reduktionsverfahren}
 \subsubsection{Doppelstationen}\label{subsubsec:doppelstationen}
-Um Speicherkapazitäten zu sparen werden zunächst alle Zugverbindungen nach Mehrfachvorkommen von Stationen geprüft. Sollte eine Station mehrfach in einer Verbindung angefahren werden, braucht diese nur einmal in der Zugverbindung gespeichert werden. Für die spätere Berechnung ist nur relevant welche Stationen in einer Zugverbindung angefahren werden. Die Reihenfolge der Stationen spielt keine Rolle. Somit gehen durch die einfache Speicherung von Stationen keine Inforamtionen verloren.\\
+In diesem Verfahren werden alle Zugverbindungen nach Mehrfachvorkommen von Stationen geprüft. Sollte eine Station mehrfach in einer Verbindung angefahren werden, braucht diese nur einmal in der Zugverbindung gespeichert werden. Für die spätere Berechnung ist nur relevant welche Stationen in einer Zugverbindung angefahren werden. Die Reihenfolge der Stationen spielt somit keine Rolle. Somit gehen durch die einfache Speicherung von Stationen keine Inforamtionen verloren.\\
 
 \subsubsection{Stationsabhängigkeiten}
-Als nächstes werden Stationsabhängigkeiten geprüft. Sollte in allen Zugverbindung die eine beliebige Station A beinhaltet, auch eine andere Station B auftauchen kann die betrachtete Station A entfernt werden. Es ist davon auszugehen, dass dabei keine Informationsverlust riskiert wird, da jede Zugverbindung der betrachteten Station A auch die gefundene Station B passiert. Ob die Stationen in jeder Verbindung gleich angefahren werden, spielt dafür keine Rolle.
+In diesem Verfahren werden Stationsabhängigkeiten geprüft. Sollte in allen Zugverbindung die eine beliebige Station A beinhaltet, auch eine Station B angefahren werden kann die betrachtete Station A in allen Zugverbindungen entfernt werden. Es ist davon auszugehen, dass dabei kein Informationsverlust riskiert wird, da jede Zugverbindung der betrachteten Station A auch die gefundene Station B passieren wird. Die Menge der Zugverbindungen die Station A anfahren ist also eine Teilmenge der Verbindungen Station B und müssen nichtmehr gesondert gespeichert und überprüft werden. Dabei kann es dazu kommen, dass Zugverbindungen aus nurnoch einer Station bestehen.\\
 
 \subsubsection{Implizite Zugverbindungen}
-Die letzte Reduktionstechnik überprüft ob eine Zugverbindung implizit in einer anderen Zugverbindung enthalten ist. Sollte dies der Fall sein, darf die größere Zugverbindung entfernt werden. Dies ist erlaubt, da alle Stationen der kleineren Verbindung auch in der größeren Verbindung angefahren werden. Die größere Verbindung ist somit redundant.\\
+In diesem Verfahren wird überprüft ob eine Zugverbindung implizit in einer anderen Zugverbindung enthalten ist. Sollte dies der Fall sein, darf die größere Zugverbindung entfernt werden. Dies ist erlaubt, da alle Stationen der kleineren Verbindung auch in der größeren Verbindung angefahren werden. Eine Überprüfung der kleineren Zugverbindung ist also Ausreichend um beide Verbindung eine Servicestationen zu gewährleisten. Die größere Verbindung ist somit redundant.\\
 
