@@ -5,17 +5,43 @@
 Das System arbeitet nach dem EVA-Prinzpip. Die EVA-Segmente werden von einem Controller erweitert, welcher das Programm koordiniert und den Einstiegspunkt des Programms darstellt.
 
 \subsection{Eingabe}\label{ver:subsec:eingabe}
-Um ein vollständiges Bahnnetz abbilden zu können werden alle Bahnverbindungen aus der Eingabedatei eingelesen. Aus diesen Verbindungen können dann später die gewünschten Bahnstationen ermittelt werden. Um das Netz möglichst übersichtlich abzuspeichern werden Instanzen des Objekt \ref{}\\
-
+Um ein vollständiges Bahnnetz abbilden zu können werden alle Bahnverbindungen aus der Eingabedatei eingelesen. Aus diesen Verbindungen können dann später die gewünschten Bahnstationen ermittelt werden. Um das Netz möglichst übersichtlich abzuspeichern werden wird Instanzen eines Objekt Zugverbindung (siehe \ref{ver:subsubsec:trainconnection}) erstellt welche dann weitergegeben werden können.\\
 
 \subsection{Verarbeitung}\label{subsec:verarbeitung}
-\subsection{Ausgabe}\label{ver:subsec:ausgabe}
+Die Liste mit den Zugverbindungen wird nun vom Controller entgegengenommen und kann nun weiterverarbeitet werden. Diese kann der Datenreduktion (siehe \ref{ver:subsubsec:reducer}) oder direkt dem Datenmodell (siehe \ref{ver:subsubsec:trainweb}) übergeben werden. \\ Das erstellte Datenmodell wird dann an den Algorithmus (siehe \ref{ver:subsec:berechnung}) übergeben. Dieser kann nun die minimale Anzahl und die Standorte der Servicestationen ermitteln. Das Ergebnis, bestehend aus einer Liste mit ermittelten Stationen wird dem Controller zurückgegeben.\\
 
-\section{Strukturen}\label{ver:sec:strukturen}
-\subsection{Datenstrukturen}\label{ver:subsec:datenstrukt}
+
+\subsection{Ausgabe}\label{ver:subsec:ausgabe}
+Das Abschließende Ergebnis wird nun an die Ausgabe weitergegeben. Diese nimmt die Liste mit den ermittelten Stationen entgegen und schreibt diese in eine Ausgabedatei.\\
+
+\section{Datenstrukturen}\label{ver:subsec:datenstrukturen}
+Um die Verarbeitung der Daten übersichtlich zu gestalten werden verschiedene Datenstrukturen erstellt. Dabei lässt sich unterscheiden in Speicher Strukturen und Verarbeitungsstrukturen.\\
+\subsection{Speicherstrukturen}\label{ver:subsec:Speicherstrukturen}
+Alle erstllten Datenstrukturen basieren auf ArrayListen. Diese bieten einerseits eine dynamische Speichermöglichkeit. Andererseits ermöglicht dies ein optimale Speicherung. Durch die Nutzung von ArrayListen können die Zugnetzdaten einmal gespeichert und dann als referenzen weitergegeben werden. Dies verhindert unnötige kopiererei und erleichtert Vergleiche.\\
+
 \subsubsection{TrainConnection}\label{ver:subsubsec:trainconnection}
+Hauptbestandteil der Datenvermittlung ist die Klasse TrainConnection. Diese besitzt als einziges Attribut eine ArrayList in welcher Stationen als String abgespeichert werden. Diese Stationen bilden dann eine vollständige  Zugverbindung ab.\\
+
+Außerdem sind zwei Vergleichmethoden implementiert. Diese ermöglichen die Liste an Stationen miteinander zu vergleichen. Eine Methode vergleicht die Anzahl der Stationen. Die zweite Methode überprüft den Inhalt der Stationen\\
+
 \subsubsection{Stations}\label{ver:subsubsec:stations}
+Um im Verlaufe der Verfahren Strukturiert vorgehen zu können existiert die Klasse Stations. Diese speichert einen Namen als String und eine ArrayListe mit Bahnverbindungen(\ref{ver:subsubsec:trainconnection}) in der der die Station angefahren wird.
+
 \subsubsection{TrainWeb}\label{ver:subsubsec:trainweb}
+Mit diesen beiden Methoden lässt sich nun das gesamte Bahnnetz speichern. Dafür werden alle Bahnverbindungen die in der Eingabedatei eingelesen werden in einer ArrayList als Attribut in TrainWeb gespeichert. Aus dieser Liste werden alle Bahnstationen gefiltert. Für jede Bahnverbindung in der eine Bahnstation vorkommt wird die jeweilige Referenz auf die Verbindung in der Bahnstation gespeichert. Bei den Bahnverbindungen innerhalb der Stationen handelt es sich nicht um neue Objekte sondern die referenz zu der Uhrsprünglichen Verbindung.\\
+
+
+% TODO Datenstruktur_Zusammenhänge.pdf hier einfügen
+
+
+\subsection{Verarbeitungsstrukturen}\label{ver:subsec:verarbeitungsstrukturen}
+Diese Speicherstrukturen werden in den folgenden Verarbeitungsstrukturen verwendet.\\
+\subsubsection{Reducer}\label{ver:subsubsec:reducer}
+Der Reducer nimmt die im Input erstellten Zugverbindungen entgegen und wendet die drei Reduktionsverfahren darauf an. Die ArrayListe an Zugverbindungen wird \\
+\subsubsection{Algorithmus}\label{ver:subsubsec:algorithmus}
+
+\section{Algorithmenbeschreibung}\label{ver:sec:verfahren}
+\subsection{Berechnung der minimalen Anzahl an Servicestationen}\label{ver:subsec:berechnung}
 
 \subsection{Beschreibung der drei Reduktionsverfahren}
 \subsubsection{Doppelstationen}\label{ver:subsubsec:doppelstationen}
