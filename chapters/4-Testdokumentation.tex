@@ -1,7 +1,9 @@
 \chapter{Testdokumentation}\label{ch:testdokumentation}
 
-
-\section{Normalfälle}\label{test:sec:normalfaelle}
+\section{Systemtests}\label{test:sec:systemtests}
+Die Systemtests wurden mit Hilfe der Testdateien durchgeführt.\\
+Im Folgenden wird auf die Systemtest mit den Testdateien eingegangen. Dazu wurden sich entsprechende Äquivalenzklassen überlegt und jeweils mit einem Vertreter dieser Klassen eine Testdatei erstellt und ein Test durchführt.\\
+\subsection{Normalfälle}\label{test:sec:normalfaelle}
 \begin{center}
     \includegraphics[width=\linewidth]{images/Tests/IHK-Beispiele/Beispiel1.png}
     \label{test:subsecpar:beispiel1}
@@ -9,36 +11,110 @@
 
 \begin{center}
     \includegraphics[width=\linewidth]{images/Tests/IHK-Beispiele/Datenreduktion1.png}
-    \label{test:subsecpar:beispiel1}
+    \label{test:subsecpar:Datenreduktion1}
 \end{center}
 
-\section{Fehlerfälle}\label{test:sec:fehlerfaelle}
+\begin{center}
+    \includegraphics[width=\linewidth]{images/Tests/IHK-Beispiele/Datenreduktion2.png}
+    \label{test:subsecpar:Datenreduktion2}
+\end{center}
+
+\begin{center}
+    \includegraphics[width=\linewidth]{images/Tests/IHK-Beispiele/Datenreduktion3.png}
+    \label{test:subsecpar:Datenreduktion3}
+\end{center}
+
+
+\subsection{Fehlerfälle}\label{test:sec:fehlerfaelle}
 Die folgenden Test decken die in \ref{auf:sec:fehlerarten} gennanten Fehlerfälle ab.
 
-\subsection{Technische Fehler}\label{test:sec:technische-fehler}
-\subsubsection{Datei ist nicht einlesbar}\label{test:subsec:datei-ist-nicht-einlesbar}
+\subsubsection{Technische Fehler}\label{test:sec:technische-fehler}
 \begin{center}
     \includegraphics[width=\linewidth]{images/Tests/Fehlerfälle/FileException.png}
     \label{test:subsecpar:einlese-fehler}
 \end{center}
 
-\subsubsection{Datei besitzt keinen lesbaren Inhat}\label{test:subsec:kein-inhalt}
 \begin{center}
     \includegraphics[width=\linewidth]{images/Tests/Fehlerfälle/LerreDatei.png}
     \label{test:subsecpar:leere-datei}
 \end{center}
 
-\subsubsection{Datei ist nicht im richtigen Format}\label{test:subsec:format}
+\subsubsection{Syntaktische Fehler}\label{test:sec:syntaktische-fehler}
 \begin{center}
     \includegraphics[width=\linewidth]{images/Tests/Fehlerfälle/FormatException.png}
     \label{test:subsecpar:format-fehler}
 \end{center}
 
-\subsubsection{Stationennamen sind nicht erlaubt}\label{test:subsec:namen-sind-nicht-erlaubt}
+\subsubsection{Semantische Fehler}\label{test:sec:semantische-fehler}
 \begin{center}
     \includegraphics[width=\linewidth]{images/Tests/Fehlerfälle/InvalidNameException.png}
     \label{test:subsecpar:namen-sind-nicht-erlaubt}
 \end{center}
 
-\section{Grenzfälle}\label{test:sec:grenzfaelle}
-\section{Sonderfälle}\label{test:sec:sonderfaelle}
+\subsection{Grenzfälle}\label{test:sec:grenzfaelle}
+
+\begin{center}
+    \includegraphics[width=\linewidth]{images/Tests/Grenzfälle/einzigeStation.png}
+    \label{test:subsecpar:einzige-station}
+\end{center}
+
+\begin{center}
+    \includegraphics[width=\linewidth]{images/Tests/Grenzfälle/einzigeVerbindung.png}
+    \label{test:subsecpar:einzige}
+\end{center}
+
+
+\subsection{Sonderfälle}\label{test:sec:sonderfaelle}
+
+\begin{center}
+    \includegraphics[width=\linewidth]{images/Tests/Sonderfälle/uerbergreifendeStation.png}
+    \label{test:subsecpar:uerbergreifendeStation}
+\end{center}
+
+\begin{center}
+    \includegraphics[width=\linewidth]{images/Tests/Sonderfälle/unabhaengigeStationen.png}
+    \label{test:subsecpar:unabhaengigeStationen}
+\end{center}
+
+
+\section{Ausführliches Beispiel}\label{test:sec:ausfuehrliches-beispiel}
+Im folgendem wird für ein Bahnnetz ein kompletter Algorithmen durchlauf beschrieben.\\
+
+Dafür wird folgende Datei eingelesen:\\
+\begin{center}
+    \includegraphics[width=\linewidth]{images/Programmdurchlauf/eingabedatei.png}
+    \label{test:subsecpar:eingabedatei}
+\end{center}
+
+Beim lesen der Datei werden Kommentare ignoriert und die Zeilen in Zugverbindungen umgewandelt. Dabei wird auf korrekte Syntax geachtet.
+Sind alle Verbindungen eingelesen werden die Stationen ermittel. Zusammen werden diese in einem Zugnetz gespeichert. Das vorliegende Zugnetz liegt folgendermaßen vor:\\
+
+\begin{center}
+    \includegraphics[width=\linewidth]{images/Programmdurchlauf/Datenstruktur01.png}
+    \label{test:subsecpar:datenstruktur1}
+\end{center}
+\\
+Diese Zugnetz wird nun Reduziert. Dafür werden die drei Reduktionsverfahren angewandt.\\
+Die erste Reduktiontechnik überprüft ob eine Station mehrfach in einer Zugverbindung vorkommt. Ist dies der Fall werden alle doppelten vorkommen entfernt.\\
+Da in diesem Fall keine doppelten Stationen vorkommen, wird das Netz nicht verändert.\\
+\\
+Die zweite Reduktionstechnik fasst Stationen zusammen, die keinen Aussagewert h aben. Dies ist dann der Fall, wenn jede Verbindung die Station A anfährt auch eine Station B beinhaltet. In diesem Fall kann Station A gelöscht werden.\\
+Stationen \texttt{K}, \texttt{S}, \texttt{B}, \texttt{L} und \texttt{DA} tauchen in jeweils nur einer Verbindung vor. Solang diese noch weiter Stationen beinhalten können diese sofort entfernt werden. Betrachtet man Station \texttt{M} und \texttt{N} lässt sich feststellen, dass diese in allen Verbindungen auch \texttt{FFM} anfahren und somit ebenfalls entfernt werden können.\\
+Das Bahnnetz liegt nun folgendermaßen vor:\\
+
+\begin{center}
+    \includegraphics[width=\linewidth]{images/Programmdurchlauf/Datenstruktur02.png}
+    \label{test:subsecpar:datenstruktur2}
+\end{center}
+
+Die dritte Reduktionstechnik überprüft ob eine Zugverbindung implizit in einer anderen Zugverbindung enthalten ist. Ist dies der Fall kann die größere Zugverbindung entfernt werden. Das gilt auch für Verbindungen die die genau selben Stationen anfahren.\\
+In diesem Fall können alle Verbindungen die die Station \texttt{FFM} anfahren entfernt werden, da Verbindung 2 und 5 nur \texttt{FFM} beinhalten. Dabei muss ebenfalls nur eine der beiden Verbindungen gespeichert werden.\\
+Die übergebliebenen Verbindungen ergeben folgendes Bahnnetz:\\
+
+\begin{center}
+    \includegraphics[width=\linewidth]{images/Programmdurchlauf/Datenstruktur03.png}
+    \label{test:subsecpar:datenstruktur2}
+\end{center}
+\\
+Das nun reduzierte Bahnnetz kann jetzt dem Algorithmus übergeben werden, welcher die Stationen ausgewählt, die als Servicestation verwerndet werden können.\\
+Dafür wir die Station ausgewählt, die in den meisten Verbindungen vorkommt. In diesem Fall haben alle Stationen gleich viele Verbindungen sodass eine beliebige Station gewählt werden kann. Wir\\
