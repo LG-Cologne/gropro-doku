@@ -46,10 +46,16 @@
     \include{title}
     \begingroup
         \hypersetup{hidelinks}
+        \thispagestyle{empty}
+        \pagestyle{empty}
         \tableofcontents
+
     \endgroup
 
     % =========== Zahlenteil ===========
+    \pagenumbering{arabic}
+    \setcounter{page}{0}
+
     \include{chapters/1-Aufgabenanalyse}
     \include{chapters/2-Verfahrensbeschreibung}
     \include{chapters/3-Programmbeschreibung}
