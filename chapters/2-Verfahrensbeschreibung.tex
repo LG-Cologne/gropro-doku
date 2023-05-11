@@ -27,15 +27,12 @@ Außerdem sind zwei Vergleichmethoden implementiert. Diese ermöglichen die gesp
  miteinander zu vergleichen. Eine Methode vergleicht die Anzahl der Stationen (hat die Verbindung mehr Haltestellen als die andere?). Die zweite Methode überprüft den Inhalt der Stationen (fahren beide Verbindungen die gleichen Stationen an?)\\
 
 \subsubsection{Station}\label{ver:subsubsec:station}
-Um im Verlaufe der Verfahren strukturiert vorgehen zu können existiert die Klasse \texttt{Station}. Diese speichert den Namen einer Station als \texttt{String} und eine \texttt{ArrayListe} mit Bahnverbindungen(\ref{ver:subsubsec:trainconnection}) in der der die Station angefahren wird.
-
-Wie in \ref{ver:fig:datenstruktur_zusammenhaenge} zu sehen, werden dabei keine Kopien der \texttt{TrainConnection}'s erstellt sondern nur Referenzen auf die ursprünglichen Objekte gespeichert.
-
+Um im Verlaufe der Verfahren strukturiert vorgehen zu können existiert die Klasse \texttt{Station}. Diese speichert den Namen einer Station als \texttt{String} und eine \texttt{ArrayListe} mit Bahnverbindungen(\ref{ver:subsubsec:trainconnection}) in der der die Station angefahren wird.\\
+Wie in \ref{ver:fig:datenstruktur_zusammenhaenge} zu sehen, werden dabei keine Kopien der \texttt{TrainConnection}'s erstellt sondern nur Referenzen auf die ursprünglichen Objekte gespeichert.\\
 Diese Klasse ist dabei nur eine Hilfestellung für spätere Operationen. Die eigentlichen Bahnstationen werden weiterhin als \texttt{String} gespeichert und verglichen. Durch diese Klasse wird verhindert, jedesmal alle Bahnverbindungen zu ermitteln zu müssen in denen eine Station vorkommt.\\
 
 \subsubsection{TrainWeb}\label{ver:subsubsec:trainweb}
 Mit diesen beiden Speicherstrukturen lässt sich nun das gesamte Bahnnetz übersichtlich speichern. Dafür stehen in dem Objekt \texttt{TrainWeb} zwei Attribute zur Verfügung. Eine \texttt{ArrayListe} mit allen Bahnverbindungen(\ref{ver:subsubsec:trainconnection}) und eine \texttt{ArrayListe} mit allen Bahnstationen(\ref{ver:subsubsec:station}).
-
 Dafür werden alle Verbindungen aus der eingelesen Datei direkt abgelegt. Die Bahnstationen können nun über das Iterieren aller Bahnverbindungen ermittelt werden. Für neue Stationen wird dann erneut über alle Verbindungen iteriert, um alle stationsbeinhaltende Verbindungen zusammen mit dem Stationsnamen als \texttt{Station}-Objekt (\ref{ver:subsubsec:station}) speichern zu können.\\
 
 \begin{center}
@@ -53,11 +50,10 @@ Der Reducer hat dabei keinen Rückgabewert. Dieser wendet die drei, als Methoden
 \subsubsection{Algorithmus}\label{ver:subsubsec:algorithmus}
 Der reduzierte Netzplan wird nun dem Algorithmus übergeben. Dieser ermittelt anhand des Plans, Bahnstationen um das gesamte Netz versorgen zu können.
 
-\section{Verbale beschreibung der Verfahren}\label{ver:sec:verfahren}
-\subsection{Berechnung der minimalen Anzahl an Servicestationen}\label{ver:subsec:berechnung}
-Dieser wählt nun iterativ die Stationen aus, die die meisten Verbindungen abdecken. Diese werden dann in einer Liste gespeichert. Mit dieser Liste kann nun überprüft werden ob alle Stationen  Anschließend werden alle Verbindungen die von diesen Stationen abgedeckt werden aus dem Netzplan entfernt. Dieser Vorgang wird solange wiederholt bis alle Verbindungen abgedeckt sind.\\
+\section{Verbale Beschreibung der Verfahren}\label{ver:sec:verfahren}
+Um sicher zu gehen, ob es sich um die minimale Lösung handelt läuft nun ein Prozess der die aktuell gefundenen Bahnstationen überprüft. Sollte eine Bahnstation keinen Einfluss auf die erreichbaren Verbindungen haben wird dieser entfernt. Wenn dies auf mehere Bahnhöfe zutrifft wird der Bahnhof gelöscht, der mehr Verbindungen abgedeckt.\\
 
-\subsection{Beschreibung der drei Reduktionsverfahren}\label{ver:subsec:reduktionsverfahren}
+\subsection{Reduktionsverfahren}\label{ver:subsec:reduktionsverfahren}
 \subsubsection{Doppelstationen}\label{ver:subsubsec:doppelstationen}
 In diesem Verfahren werden alle Zugverbindungen nach Mehrfachvorkommen von Stationen geprüft. Sollte eine Station mehrfach in einer Verbindung angefahren werden, braucht diese nur einmal in der Zugverbindung gespeichert werden. Für die spätere Berechnung ist nur relevant welche Stationen in einer Zugverbindung angefahren werden. Die Reihenfolge der Stationen spielt somit keine Rolle. Somit gehen durch die einfache Speicherung von Stationen keine Inforamtionen verloren.\\
 
@@ -67,3 +63,5 @@ In diesem Verfahren werden Stationsabhängigkeiten geprüft. Sollte in allen Zug
 \subsubsection{Implizite Zugverbindungen}
 In diesem Verfahren wird überprüft ob eine Zugverbindung implizit in einer anderen Zugverbindung enthalten ist. Sollte dies der Fall sein, darf die größere Zugverbindung entfernt werden. Dies ist erlaubt, da alle Stationen der kleineren Verbindung auch in der größeren Verbindung angefahren werden. Eine Überprüfung der kleineren Zugverbindung ist also Ausreichend um beiden Verbindungen eine Servicestationen zu gewährleisten. Die größere Verbindung ist somit redundant.\\
 
+\subsection{Berechnung der minimalen Anzahl an Servicestationen}\label{ver:subsec:berechnung}
+Der Algorihtmus wählt aus den Stationen des Netzplans, die Station aus, die in den meisten Verbindungen auftaucht. Diese wird in einer Liste gespeichert. Daraufhin startet eine Schleife, die solange Bahnhöfe der Liste hinzufügt, bis alle Verbindungen versorgt werden. Dabei werden immer die Bahnhöfe ausgewählt, die in den noch nicht versorgten Verbindungen die meisten neuen Zugverbindungen versorgen können.\\
