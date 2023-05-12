@@ -106,15 +106,45 @@ Das Bahnnetz liegt nun folgendermaßen vor:\\
     \includegraphics[width=\linewidth]{images/Programmdurchlauf/Datenstruktur02.png}
     \label{test:subsecpar:datenstruktur2}
 \end{center}
-
-Die dritte Reduktionstechnik überprüft ob eine Zugverbindung implizit in einer anderen Zugverbindung enthalten ist. Ist dies der Fall kann die größere Zugverbindung entfernt werden. Das gilt auch für Verbindungen die die genau selben Stationen anfahren.\\
-In diesem Fall können alle Verbindungen die die Station \texttt{FFM} anfahren entfernt werden, da Verbindung 2 und 5 nur \texttt{FFM} beinhalten. Dabei muss ebenfalls nur eine der beiden Verbindungen gespeichert werden.\\
+\\
+Die ∏dritte Reduktionstechnik überprüft ob eine Zugverbindung implizit in einer anderen Zugverbindung enthalten ist. Ist dies der Fall kann die größere Zugverbindung entfernt werden. Das gilt auch für Verbindungen die die genau selben Stationen anfahren.\\
+Dafür werden die Verbindungen mit den wenigsten Stationen betrachtet. In diesem Fall bestehen Verbindung 2 und 5 nurnoch aus der Station \texttt{FFM}. Verbindungen, welche die Teilstrecke \texttt{FFM} beinhalten können nun entfernt werden. Das heißt auch, das Verbindungen die equivalent zur betrachteten Verbindung ist, also die exakt selben Stationen anfährt, ebenfalls entfernt werden kann.\\
 Die übergebliebenen Verbindungen ergeben folgendes Bahnnetz:\\
 
 \begin{center}
     \includegraphics[width=\linewidth]{images/Programmdurchlauf/Datenstruktur03.png}
-    \label{test:subsecpar:datenstruktur2}
+    \label{test:subsecpar:datenstruktur3}
 \end{center}
 \\
 Das nun reduzierte Bahnnetz kann jetzt dem Algorithmus übergeben werden, welcher die Stationen ausgewählt, die als Servicestation verwerndet werden können.\\
-Dafür wir die Station ausgewählt, die in den meisten Verbindungen vorkommt. In diesem Fall haben alle Stationen gleich viele Verbindungen sodass eine beliebige Station gewählt werden kann. Wir\\
+Dafür wir die Station ausgewählt, die in den meisten Verbindungen vorkommt. In diesem Fall haben alle Stationen gleich viele Verbindungen sodass eine beliebige Station gewählt werden kann. Diese Station wird in eine Liste von Stationen gegeben.\\
+
+\begin{center}
+    \includegraphics[width=\linewidth]{images/Programmdurchlauf/Datenstruktur04.png}
+    \label{test:subsecpar:datenstruktur04}
+\end{center}
+\\
+Nun wird verglichen, ob es noch Verbindungen gibt, die noch keine Servicestation beinhalten. Dazu werden alle Verbindungen der Stationen in der neuen Liste gesammelt und um anschluss mit allen Verbindungen des Netzplans zu verglichen.\\
+Die hier hinzugefügte Station \texttt{HH} deckt die Verbindung 1 ab. Verbindung 2 ist noch nicht versorgt, sodass nun weitergesucht werden muss\\
+Dafür werden alle noch nicht versorgten Verbindungen betrachtet und die Stationen ausgewählt, die in den meisten Verbindungen vorkommt.\\
+Da es sich nurnoch im eine Verbindung handelt kann man eine beliebige Station der Verbindung auswählen. So kann auch \texttt{FFM} an die Liste angehängt werden.\\
+
+\begin{center}
+    \includegraphics[width=\linewidth]{images/Programmdurchlauf/Datenstruktur05.png}
+    \label{test:subsecpar:datenstruktur05}
+\end{center}
+\\
+Bevor überprüft werden kann, ob alle Verbindungen versorgt sind, wird jetzt überprüft, ob alle Stationen der Liste wirklich gebraucht werden.\\
+Dazu wird verglichen ob die komplette Liste die selben Verbindungen abdecken kann wie die Liste ohne eine Station. Sollte dies der Fall sein, wird die Station aus der Liste entfernt. Wurden mehere Stationen gefunden werden, wird die Station gelöscht, die in mehr Verbindungen vorkommt entfernt. Konnte eine Station gelöscht werden wiederholt sich der Kontrollprozess solange, wie noch Stationen gefunden werden, die entfernt werden können.\\
+In diesem Fall gibt es jedoch keine Verbindung, die gelöscht werden kann.\\
+
+Jetzt kann überprüft werden, ob alle Verbindungen versorgt sind. In diesem Fall beinhalten alle Verbindungen mindestens eine Station der neuen Liste.\\
+Somit ist die Liste der Servicestationen vollständig und kann ausgegeben werden.\\
+
+Dafür wird folgendes Dokument ausgegeben:\\
+\begin{center}
+    \includegraphics[width=\linewidth]{images/Programmdurchlauf/ausgabedatei.png}
+    \label{test:subsecpar:ausgabedatei}
+\end{center}
+\\
+Der Programmdurchlauf ist nun abgeschlossen.\\
