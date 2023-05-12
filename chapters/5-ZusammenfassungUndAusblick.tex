@@ -2,6 +2,30 @@
 
 
 \section{Zusammenfassung}\label{sec:zusammenfassung}
+Es wurde ein Programm entwickelt, welches die Berechnung von Servicestationen wie gefordert umsetzt.
+Eingabe, Verarbeitung und Ausgabe laufen in voneinander unabhängigen Prozessen. Beliebige Datensätze können dem Programm übergeben. Die Verarbeitung erfolgt in zwei Schritten in dem zunächst eine optionale Reduktion auf die Eingabedaten durchgeführt wird und anschließend die eigentliche Berechnung stattfindet. Das Programm endet, wenn das gefundene Ergebnis ausgegeben wurde.\\
+Die angesprochenen Teilaufgaben wurden in einzelne Klassen aufgeteilt. Diese können unabhängig voneinander verändert und erweitert werden.
+Die Verfahren und ihre Details wurden ausführlich dokumentiert. Die Wahl von unterschiedlichen Datenstrukturen wurde begründet und der Programmentwurf ist durch diverse UML- und Nassi-Shneiderman-Diagramme gut nachvollziehbar. Für Entwickler wurde eine Dokumentation direkt im Source-Code erstellt.
 
 \section{Ausblick}\label{sec:ausblick}
+\subsection{Einführung von Pattern}\label{sec:pattern}
+Wie bereits angesprochenen sind alle Teilaufgaben systematisch getrennt. Hier bietet es sich an ein Stategie-Pattern zu implementieren. Dieses würde es ermöglichen die einzelnen Teilaufgaben austauschbar zu machen. Außerdem ist ein Rahmen gegeben sodass Veränderungen keinen Einfluss auf die Benutzung der einzelnen Komponenten haben können.\\
 
+\subsection{Algorithmus}\label{sec:algorithmus}
+Der implementierte Algorithmus glänz mit Laufzeiteffizienz. Er ist in der Lage ein Bahnnetz mit 10.000 Verbindungen und 500 Staitionen in bis zu 5:11:29 Minuten auszurechnen. Je nach Hardware kann dies varieren.\\
+Beim Vergleich mit anderen Algorithmen ist jedoch aufgefallen, dass nicht immer die minimale Anzahl an Servicestationen ermittelt wird. Dies stellt logischerweise ein Problem dar und sollte dringend ausgebessert werden.\\
+
+Dafür bieten sich folgende Ansätze an. \\
+
+\subsubsection{Reiner Brute-Force Ansatz}\label{sec:brute-force}
+Um sicher zu gehen, immer ein minimales Ergebnis zu erhalten, kann ein Brute-Force Ansatz implementiert werden. Dieser würde alle möglichen Kombinationen an Lösungsstationen durchgehen und die Lösung mit der geringsten Anzahl an Stationen ausgeben. Auf unkomplexe Bahnnetze können bei diesem Ansatz gute Ergebnisse erzielt werden. Da es sich beim Brute-Force Ansatz jedoch um ein expondenzielles Verfahren handelt, ist die Laufzeit bei komplexeren Bahnnetzen nicht wünschenswert.\\
+Dies gilt auch wenn ein Abbruchkriterium eingebaut wird, welches neue Ergebnisse durch das aktuell beste Ergebnis einschränkt. Damit werden nurnoch Kombinationen überprüft, die eine Verbesserung zum aktuellen Ergebnis ermöglichen können. Auch hier müssen jedoch Laufzeiteinbussen in kauf genommen werden\\
+
+\subsubsection{Erweiterung durch Brute-Force}
+Um von der Laufzeiteffizienz des aktuellen Algorithmus zu profitieren und trotzdem ein tatsächlich minimales Ergebnis zu erhalten, kann der Algorithmus um einen Brute-Force Ansatz erweitert werden. Dafür wird das Ergebnis der des Greedy-Algorithmus mit einem Brute-Force Ansatz validiert.\\
+Dazu werden wird die Liste an Servicestationen überprüft und für jede möglichen Stations Kombination ermittelt. Diese werden dann ebenfalls mit allen Kombinationen von allen verfügbaren Stationen verglichen. Bedingung ist das die Auswahl an Bahnstation kleiner ist als die der aktuellen Service Stationen. Sollten beide Kombinationen die selben Verbindungen abdecken, wird die neue Kombination als mit den betrachteten Servicestationen getauscht.\\
+Sollten keine Tauschmöglichkeiten mehr gefunden werden ist davon auszugehen eine tatsächlich minimal Anzahl an Staionen gefunden zu haben.\\
+Auch dieser Ansatz ist expondenziell. Durch eine bereits approximierte Lösung ist jedoch davon auszugehen, dass weniger Vergleiche getätigt werden müssen und die Laufzeit besser wird.\\
+
+\subsection{Testabdeckung}\label{sec:testabdeckung}
+Die hier dokumentierten Test, testen nur einen erfolgreichen oder auch fehlerhaften Durchlauf des Programms. Da die Projektstruktur eine saubere Trennung der einzelnen Komponenten gewährleistet, bietet es sich an diese mit Unit-Tests zu testen.\\

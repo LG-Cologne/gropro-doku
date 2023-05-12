@@ -16,15 +16,15 @@ Nach dem Entpacken kann das Programm über den Befehl
 \begin{center}
     \colorbox{gray!20}{
         \begin{minipage}{0.9\textwidth}
-            java -jar \Artifact.jar "test/input/test\_ihk1.txt"
+            java -jar \Artifact.jar \enquote{input/test\_ihk1.txt}
         \end{minipage}
     }
 \end{center}
 in der Eingabeaufforderung (CMD) oder beliebiger Bash ausgeführt werden.
 \section{Testen der Beispiele}\label{sec:testen-der-beispiele}
 Das Ausführen der automatischen Tests erfolgt über die Datei \enquote{run-tests.sh}.
-In der Konsole wird nun das Programm für jede Datei im Ordner \enquote{test/input} ausgeführt.
-Alle Dateiausgaben befinden sich im Anschluss im Ordner \enquote{test/output}.
+In der Konsole wird nun das Programm für jede Datei im Ordner \enquote{input} ausgeführt.
+Alle Dateiausgaben befinden sich im Anschluss im selben Ordner. Der Name der Ausgabedateien lässt dabei auf die jeweilige Inputdatei schließen.
 
 \section{Kompilieren}\label{sec:kompilieren}
 Zum Erzeugen der .jar-Datei sollte Maven genutzt werden.

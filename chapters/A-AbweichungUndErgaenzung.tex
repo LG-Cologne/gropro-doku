@@ -1,4 +1,30 @@
 \chapter{Abweichung und Ergänzung}\label{ch:abweichung-und-ergaenzung}
 
+\section{Probleme}
+Im Verlaufe der Implemeniterung ist aufgefallen, dass manche Projektabschnitte in der Klausur falsch verstanden wurden. In der folge dessen wurden falsche schlüße gezogen.\\
+
+\subsection{Datenreduktionsverfahren 2}
+Ein Beispiel ist die zweite Reduktionsmethode. Diese entfernt nicht nur, wie zunächst angenommen, benachtbarte Stationen. Die Reihenfolge der Stationen ist bei der Reduktion hinfällig. Dadurch gibt es massive unterschiede in der implementierung der zweiten Redukitonsmethode.\\
+
+\subsection{Algorithmus}
+Innerhalb der Klausur sind gedanklich die Stationen und Verbindungen miteinander verschmolzen. Teilweise werden Verfahren dadurch falsch gefolgert und falsch dargestellt.
+
+
 \section{Datenstrukturen}
-\section{Methoden}
+Um ein Übersichtliches System zu schaffen, wurden in der Strukturierung auf mögliche Hilfsklassen verzichtet. Damit sollte die leserlichkeit erhalten bleiben und die Struktur Übersichtlich gestalten.\\
+Dieser Ansatz wurde aus mehreren Gründen verworfen.\\
+\subsection{Trennung von Speicher und Verarbeitung}
+Die geplante Modell Klasse sollte ursprünglich nicht nur die Daten speichern sondern ebenfalls die Reduktionsverfahren wie auch den Algorithmus berechnen. Dies führte zu Übersichts Problemen. Erster Ansatz war nun das Datenmodell und die Verfahren zu trennen.\\ 
+
+\subsection{Trennung der Verfahren}
+Dadurch konnten Klassen deutlich reduziert werden. Die gewünschte Übersicht war immernoch nicht gegeben. Dies führte zur jetzigen Trennung.\\
+
+\subsection{Datenmodell}
+Ebenso musste festgestellt werden, dass das Datenmodell nicht optimal gewählt wurde. Ursprünglich sollten Stationen nur innerhalb der Verbindungen gespeichert werden. Dafür war die verwendung von geschachtelten \texttt{Arrays} angedacht.\\
+Aus meheren gründen wurde diese Idee verworfen.\\
+Fehlende dynamik des Datentypen, fehlende Übersichtlichkeit der Verbindungen wie auch ein anbahnen von dauerhaften kopieren von Stationen haben zu einem Umdenken geführt.\\
+\\
+Die Speicherklasse Bahnhof (\ref{ver:subsubsec:station}) wurde in der Folge um die Klasse Bahnverbindung (\ref{ver:subsubsec:trainconnection}) ergänzt.\\
+Außerdem wurden sämtliche \texttt{Arrays} durch \texttt{ArrayListen} ersetzt.\\
+\\
+Dies änderungen führen zu der beschriebenen Datenstruktur (\ref{ver:fig:datenstruktur_zusammenhaenge}).\\
